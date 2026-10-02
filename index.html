@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stickman Football</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='%23fff' stroke='%23111' stroke-width='4'/><path d='M32 18l10 7-4 12H26l-4-12z' fill='%23111'/></svg>" />
+  <link rel="stylesheet" href="/src/host/style.css" />
+</head>
+<body>
+  <div id="view"></div>
+
+  <!-- in-match HUD -->
+  <div id="hud" hidden>
+    <div id="score">
+      <span class="rc" id="rc0"></span><span class="tm" id="tn0">CRM</span><b id="s0">0</b><i>–</i><b id="s1">0</b><span class="tm" id="tn1">BLU</span><span class="rc" id="rc1"></span>
+      <span class="clock"><span id="clock">00:00</span><small id="halflbl">1ST HALF</small></span>
+    </div>
+    <canvas id="radar" width="260" height="168"></canvas>
+    <div class="pbox" id="pbox0"><span class="pl">P1</span><div class="bar"><div id="stam0"></div></div></div>
+    <div class="pbox" id="pbox1"><span class="pl">P2</span><div class="bar"><div id="stam1"></div></div></div>
+    <div id="banner"><div class="cardico"></div><h1></h1><p></p></div>
+    <div id="toast"></div>
+    <div id="so" hidden>
+      <div class="row"><span class="tm" id="son0"></span><span class="dots" id="sod0"></span></div>
+      <div class="row"><span class="tm" id="son1"></span><span class="dots" id="sod1"></span></div>
+    </div>
+    <div id="replaytag" hidden><span class="dot"></span> REPLAY <small>press any button to skip</small></div>
+  </div>
+
+  <!-- lobby -->
+  <div id="lobby">
+    <div class="title"><span>STICKMAN</span> FOOTBALL</div>
+    <p class="sub">Scan a code with your phone camera. Your phone becomes your controller.</p>
+    <div class="cards">
+      <div class="card" id="card0">
+        <h2>PLAYER 1 <em></em></h2>
+        <canvas class="qr" width="190" height="190"></canvas>
+        <div class="state">Waiting for phone…</div>
+        <div class="kit"><span class="sw"></span><span class="kn"></span></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="card" id="card1">
+        <h2>PLAYER 2 <em></em></h2>
+        <canvas class="qr" width="190" height="190"></canvas>
+        <div class="state">Waiting for phone…</div>
+        <div class="kit"><span class="sw"></span><span class="kn"></span></div>
+      </div>
+    </div>
+    <div class="opts">
+      <div class="opt" data-key="size"><label>Squad</label><button data-v="7">7v7</button><button data-v="11">11v11</button></div>
+      <div class="opt" data-key="half"><label>Half length</label><button data-v="60">1 min</button><button data-v="120">2 min</button><button data-v="180">3 min</button></div>
+      <div class="opt" data-key="level"><label>CPU level</label><button data-v="0.5">Rookie</button><button data-v="0.75">Pro</button><button data-v="1">Legend</button></div>
+      <div class="opt" data-key="replay"><label>Replays</label><button data-v="1">On</button><button data-v="0">Off</button></div>
+      <div class="opt" data-key="cam"><label>Camera</label><button data-v="tele">Tele</button><button data-v="broadcast">Broadcast</button><button data-v="wide">Wide</button></div>
+      <div class="opt" data-key="pens"><label>Draw</label><button data-v="1">Penalties</button><button data-v="0">Stays a draw</button></div>
+    </div>
+    <div class="foot">
+      <span id="urlhint"></span>
+      <span>Room <b id="roomcode">----</b></span>
+      <button id="soundbtn">🔊 Enable sound</button>
+      <button id="startbtn">Kick off ▶ <small>(Enter)</small></button>
+    </div>
+    <p class="kb">No phone? Keyboard: <b>WASD</b> move · <b>J</b> ✕ pass · <b>K</b> □ shoot · <b>L</b> ○ lob · <b>I</b> △ through · <b>Shift</b> R2 sprint · <b>Q</b> L1 · <b>E</b> R1 · <b>Space</b> L2 · <b>C</b> camera · <b>Esc</b> pause</p>
+  </div>
+
+  <div class="overlay" id="pause" hidden>
+    <div class="panel"><h1>PAUSED</h1><p id="pausemsg">Press Esc or use a phone to resume.</p><div class="cards small" id="reconnect"></div></div>
+  </div>
+  <div class="overlay" id="end" hidden>
+    <div class="panel wide">
+      <h1 id="endtitle">FULL TIME</h1>
+      <div class="final"><span id="e-n0"></span><b id="e-s0"></b><i>–</i><b id="e-s1"></b><span id="e-n1"></span></div>
+      <table id="stats"></table>
+      <p>Press <b>Rematch</b> on a phone, or hit <b>Enter</b> · <b>M</b> for the menu</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/host/main.ts"></script>
+</body>
+</html>

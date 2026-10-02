@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a1020" />
+  <title>Stickman Pad</title>
+  <link rel="stylesheet" href="/src/pad/pad.css" />
+</head>
+<body>
+  <div id="rotate"><div>↻</div><p>Rotate your phone<br/>to landscape</p></div>
+
+  <!-- connecting / errors -->
+  <div id="status" class="screen"><h1 id="statustext">Connecting…</h1></div>
+
+  <!-- lobby: pick a kit and get ready -->
+  <div id="lobby" class="screen" hidden>
+    <h2 id="who">PLAYER 1</h2>
+    <div class="kitpick">
+      <button id="prev">‹</button>
+      <div class="kitview"><div class="shirt" id="shirt"></div><div class="kitname" id="kitname"></div></div>
+      <button id="next">›</button>
+    </div>
+    <div class="row"><button id="ready">I'M READY</button><button id="help1" class="ghost">CONTROLS</button></div>
+    <small>Game starts when everyone is ready</small>
+  </div>
+
+  <!-- gamepad (PlayStation / FIFA layout) -->
+  <div id="game" hidden>
+    <div id="stickzone"><div id="stickbase"><div class="sprintring"></div><div id="stickknob"></div></div><span class="hint">MOVE · push to the edge to sprint</span></div>
+
+    <button class="b sh" id="bL2" data-bit="128"><b>L2</b><span id="lL2">SHIELD</span></button>
+    <button class="b sh" id="bL1" data-bit="32"><b>L1</b><span id="lL1">CHIP</span></button>
+    <button class="b sh" id="bR1" data-bit="64"><b>R1</b><span id="lR1">FINESSE</span></button>
+    <button class="b sh" id="bR2" data-bit="16"><b>R2</b><span id="lR2">SPRINT</span></button>
+
+    <div id="diamond">
+      <button class="b face" id="bT" data-bit="8"><b>△</b><span id="lT">THROUGH</span></button>
+      <button class="b face" id="bO" data-bit="4"><b>○</b><span id="lO">LOB</span></button>
+      <button class="b face" id="bX" data-bit="1"><b>✕</b><span id="lX">PASS</span></button>
+      <button class="b face" id="bS" data-bit="2"><b>□</b><span id="lS">SHOOT</span></button>
+    </div>
+    <div id="top"><span id="ctxlabel"></span><button id="help2" class="icon">?</button><button id="menu" class="icon">❚❚</button></div>
+  </div>
+
+  <!-- pause / end -->
+  <div id="overlay" class="screen" hidden>
+    <h1 id="ovtitle">PAUSED</h1>
+    <div class="row" id="ovbtns"></div>
+  </div>
+
+  <!-- controls help -->
+  <div id="help" class="screen" hidden>
+    <div class="helpgrid">
+      <section><h3>Attacking</h3>
+        <p><b>✕</b> pass · <b>R1+✕</b> driven pass</p>
+        <p><b>△</b> through ball · <b>L1+△</b> lobbed through</p>
+        <p><b>○</b> lob / cross · <b>○○</b> low cross · <b>○○○</b> ground cross</p>
+        <p><b>□</b> shoot (hold = power) · <b>□□</b> low shot</p>
+        <p><b>R1+□</b> finesse · <b>L1+□</b> chip · <b>L1+R1+□</b> power shot</p>
+        <p><b>R2</b> sprint · <b>R1</b> close control · <b>L2</b> shield</p>
+      </section>
+      <section><h3>Defending</h3>
+        <p><b>✕</b> (hold) contain · <b>○</b> tackle · <b>□</b> slide</p>
+        <p><b>R1</b> (hold) team-mate contain · <b>△</b> (hold) keeper rush</p>
+        <p><b>L1</b> switch player (tap again to cycle) · <b>L2</b> jockey</p>
+      </section>
+      <section><h3>First-time &amp; headers</h3>
+        <p>Press while the ball is coming: it's played the moment it arrives.</p>
+        <p>Ball in the air: <b>✕</b> head pass · <b>□</b> header · <b>○</b> clear · <b>△</b> flick-on</p>
+        <p>No button = chest / head control.</p>
+      </section>
+      <section><h3>Penalties</h3>
+        <p>Taker: aim with the stick, hold <b>□</b> for power · <b>L1+□</b> chip · <b>R1+□</b> placed.</p>
+        <p>Keeper: move with the stick, press any face button to dive that way (stick up = high).</p>
+      </section>
+    </div>
+    <label class="toggle"><input type="checkbox" id="edgesprint" checked /> Sprint by pushing the stick to the edge</label>
+    <button id="closehelp">GOT IT</button>
+  </div>
+
+  <script type="module" src="/src/pad/main.ts"></script>
+</body>
+</html>
